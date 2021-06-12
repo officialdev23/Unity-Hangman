@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.IO;
 
 public class GameController : MonoBehaviour
 {
@@ -12,7 +13,8 @@ public class GameController : MonoBehaviour
     public GameObject loseText;
 
     private float time;  //in C# when the value is empty it's assigned 0 by default.
-    private string[] wordsLocal= { "NEYMAR JR","RONALDO JR"};
+    //private string[] wordsLocal= { "NEYMAR JR","RONALDO JR"};
+    private string[] words = File.ReadAllLines(@"Assets/Words.txt");  //loading words from file
     //private int[] myNums = { 1, 2, 3, 4 };
     private string chosenWord;
     private string hiddenWord;
@@ -24,7 +26,7 @@ public class GameController : MonoBehaviour
     {
         //Debug.Log("fist value : " + wordsLocal[0]);
         //Debug.Log("Random value : " + wordsLocal[Random.Range(0,wordsLocal.Length)]);
-        chosenWord = wordsLocal[Random.Range(0, wordsLocal.Length)];
+        chosenWord = words[Random.Range(0, words.Length)].ToUpper();
 
         for(int i = 0; i < chosenWord.Length; i++)
         {
