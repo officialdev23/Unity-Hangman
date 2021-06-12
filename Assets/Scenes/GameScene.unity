@@ -220,7 +220,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &190627548
 Transform:
   m_ObjectHideFlags: 0
@@ -1132,7 +1132,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &987764548
 Transform:
   m_ObjectHideFlags: 0
@@ -1264,7 +1264,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1211654558
 Transform:
   m_ObjectHideFlags: 0
@@ -1361,7 +1361,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1286768762
 Transform:
   m_ObjectHideFlags: 0
@@ -1833,8 +1833,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7a17e944fa5c5448a2d78fea0db466d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hangman:
+  - {fileID: 1915475708}
+  - {fileID: 987764547}
+  - {fileID: 1286768761}
+  - {fileID: 2013374012}
+  - {fileID: 190627547}
+  - {fileID: 1211654557}
   timeField: {fileID: 814643603}
   wordToFindField: {fileID: 9616081}
+  winText: {fileID: 634310911}
+  loseText: {fileID: 941911503}
 --- !u!4 &1802392114
 Transform:
   m_ObjectHideFlags: 0
@@ -1867,7 +1876,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1915475709
 Transform:
   m_ObjectHideFlags: 0
@@ -2160,7 +2169,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2013374013
 Transform:
   m_ObjectHideFlags: 0
