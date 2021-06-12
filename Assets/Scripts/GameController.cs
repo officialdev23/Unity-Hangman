@@ -11,10 +11,11 @@ public class GameController : MonoBehaviour
     public Text wordToFindField;
     public GameObject winText;  //to control the win screen
     public GameObject loseText;
+    public GameObject replayButton;
 
     private float time;  //in C# when the value is empty it's assigned 0 by default.
     //private string[] wordsLocal= { "NEYMAR JR","RONALDO JR"};
-    private string[] words = File.ReadAllLines(@"Assets/Words.txt");  //loading words from file
+    private string[] words = File.ReadAllLines(@"Assets/Texts/Words.txt");  //loading words from file
     //private int[] myNums = { 1, 2, 3, 4 };
     private string chosenWord;
     private string hiddenWord;
@@ -125,6 +126,7 @@ public class GameController : MonoBehaviour
                 {
                     //Debug.Log("YOU LOSE!");
                     loseText.SetActive(true);
+                    replayButton.SetActive(true);   //show the replay button to reload the scene
                     gameEnd = true;
                 }
             }
@@ -147,6 +149,7 @@ public class GameController : MonoBehaviour
                 {
                     //Debug.Log("YOU WIN!");
                     winText.SetActive(true);
+                    replayButton.SetActive(true);   //show the replay button to reload the scene
                     gameEnd = true;
                 }
             }   
