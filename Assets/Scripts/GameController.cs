@@ -6,12 +6,14 @@ using System.IO;
 
 public class GameController : MonoBehaviour
 {
-    public GameObject[] hangman;   //array of game objects to store the hangman related game objects.
     public Text timeField;
     public Text wordToFindField;
+    public Text messageField;
+    public GameObject[] hangman;   //array of game objects to store the hangman related game objects.
     public GameObject winText;  //to control the win screen
     public GameObject loseText;
     public GameObject replayButton;
+    
 
     private float time;  //in C# when the value is empty it's assigned 0 by default.
     //private string[] wordsLocal= { "NEYMAR JR","RONALDO JR"};
@@ -43,18 +45,16 @@ public class GameController : MonoBehaviour
             hiddenWord += "_";
         }
         //hiddenWord = hiddenWord.Substring(0,hiddenWord.Length-1);  //remove the last char cuz it's space
-
-        
+    
         wordToFindField.text = hiddenWord;
+        messageField.text = "";
         //Debug.Log(hiddenWord);
-
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (gameEnd == false)
+        if (gameEnd == false)   //stop the timer once the game is over.
         {
             //deltaTime returns the interval in seconds from the last frame to the current one.
             time += Time.deltaTime;   //i.e if we have 1fps deltaTime=1; 10fps deltaTime=0.1
@@ -110,12 +110,12 @@ public class GameController : MonoBehaviour
 
 
         //Method-2
-        if (e.type == EventType.KeyDown && e.keyCode.ToString().Length == 1) //e.keyCode.ToString().Length==1 to prevent the "None" 
+        if (e.type == EventType.KeyDown && e.keyCode.ToString().Length == 1 && gameEnd==false) //e.keyCode.ToString().Length==1 to prevent the "None" 
         {
             //Debug.Log(e.type);
             //Debug.Log(e.keyCode); //on one key stroke eg: 'Q' we get 'Q' followed by 'None'.
-            string keyPressed = e.keyCode.ToString();
-
+            string keyPressed = e.keyCode.ToString(); 
+            messageField.text = "";
 
             if (!hiddenWord.Contains(keyPressed) && !chosenWord.Contains(keyPressed))
             {
@@ -126,13 +126,19 @@ public class GameController : MonoBehaviour
                 {
                     //Debug.Log("YOU LOSE!");
                     loseText.SetActive(true);
+
+                    //play lose audio
+                    AudioSource a = loseText.GetComponent<AudioSource>(); //get the audio source component from the game object
+                    a.Play();  //the game object loseText in this case will have to be in active state for this to work
+
                     replayButton.SetActive(true);   //show the replay button to reload the scene
                     gameEnd = true;
                 }
             }
             else if(hiddenWord.Contains(keyPressed))
             {
-                Debug.Log("ALREADY ENTERED LETTER");
+                //Debug.Log("ALREADY ENTERED LETTER");
+                messageField.text = "Character already entered!";
             }
             else  //the entered input is a letter in the chosenWord
             {
@@ -149,6 +155,11 @@ public class GameController : MonoBehaviour
                 {
                     //Debug.Log("YOU WIN!");
                     winText.SetActive(true);
+
+                    //Playing win audio
+                    AudioSource a = winText.GetComponent<AudioSource>(); //get the audio source component from the game object
+                    a.Play();  //the game object loseText in this case will have to be in active state for this to work
+
                     replayButton.SetActive(true);   //show the replay button to reload the scene
                     gameEnd = true;
                 }
