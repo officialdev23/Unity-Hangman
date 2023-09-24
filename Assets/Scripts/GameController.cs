@@ -7,6 +7,7 @@ using System.IO;
 public class GameController : MonoBehaviour
 {
     public Text timeField;
+   // [SerializeField] private Text timeField;
     public Text wordToFindField;
     public Text messageField;
     public GameObject[] hangman;   //array of game objects to store the hangman related game objects.
@@ -18,18 +19,25 @@ public class GameController : MonoBehaviour
     private float time;  //in C# when the value is empty it's assigned 0 by default.
     //private string[] wordsLocal= { "NEYMAR JR","RONALDO JR"};
     private string[] words = File.ReadAllLines(@"Assets/Texts/Words.txt");  //loading words from file
+    private string[] hints = File.ReadAllLines(@"Assets/Texts/Hints.txt");
+    private string hint;
     //private int[] myNums = { 1, 2, 3, 4 };
     private string chosenWord;
     private string hiddenWord;
     private int countChance = 0;// we have 5 chances(6 will end the game with losing screen), as our hangman has 6 body elements.
     private bool gameEnd = false;
+    private int questionNo;
 
     // Start is called before the first frame update
     void Start()
     {
         //Debug.Log("fist value : " + wordsLocal[0]);
         //Debug.Log("Random value : " + wordsLocal[Random.Range(0,wordsLocal.Length)]);
-        chosenWord = words[Random.Range(0, words.Length)].ToUpper();
+        questionNo = Random.Range(0, words.Length);  //random = 5 
+        chosenWord = words[questionNo].ToUpper();    //word = 5th line in file
+        hint = hints[questionNo].ToUpper();
+        Debug.Log(chosenWord);
+        Debug.Log(questionNo);
 
         for(int i = 0; i < chosenWord.Length; i++)
         {
@@ -47,7 +55,7 @@ public class GameController : MonoBehaviour
         //hiddenWord = hiddenWord.Substring(0,hiddenWord.Length-1);  //remove the last char cuz it's space
     
         wordToFindField.text = hiddenWord;
-        messageField.text = "";
+        
         //Debug.Log(hiddenWord);
     }
 
@@ -57,10 +65,11 @@ public class GameController : MonoBehaviour
         if (gameEnd == false)   //stop the timer once the game is over.
         {
             //deltaTime returns the interval in seconds from the last frame to the current one.
-            time += Time.deltaTime;   //i.e if we have 1fps deltaTime=1; 10fps deltaTime=0.1
+            time += Time.deltaTime;   
             timeField.text = ((int)time).ToString();  //just displaying the time in seconds(ignoring ms)
             //Debug.Log(Time.deltaTime); approx 0.02s, i.e. 1f in 0.02s which means it's 50fps
         }
+        messageField.text = hint;
 
     }
 
@@ -70,46 +79,10 @@ public class GameController : MonoBehaviour
     {
         Event e = Event.current;   //returns the current event being processed.
 
-        //Method-1
-        /*
-        if(e.type == EventType.KeyDown && e.keyCode.ToString().Length==1) //e.keyCode.ToString().Length==1 to prevent the "None" 
-        {
-            //Debug.Log(e.type);
-            //Debug.Log(e.keyCode); //on one key stroke eg: 'Q' we get 'Q' followed by 'None'.
-            string keyPressed = e.keyCode.ToString();
-            string result = "";
-            if(chosenWord.Contains(keyPressed))
-            {
-                if (hiddenWord.Contains(keyPressed))
-                {
-                    Debug.Log("ALREADY ENTERED!");
-                }
-                else
-                {
-                    for(int i = 0; i < chosenWord.Length; i++)
-                    {
-                        if (chosenWord.ToUpper()[i].ToString() == keyPressed)
-                        {
-                            result+=keyPressed;
-                        }
-                        else
-                        {
-                            result += hiddenWord[i];
-                        }
-                    }
-                    hiddenWord = result;
-                    wordToFindField.text = hiddenWord;
-                }
-            }
-            else
-            {
-                Debug.Log("NOPE!");
-            }
-        }
-        */
+   
 
 
-        //Method-2
+      
         if (e.type == EventType.KeyDown && e.keyCode.ToString().Length == 1 && gameEnd==false) //e.keyCode.ToString().Length==1 to prevent the "None" 
         {
             //Debug.Log(e.type);
