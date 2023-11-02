@@ -350,6 +350,8 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.ref.dll"
 "Assets/Scripts/ButtonController.cs"
 "Assets/Scripts/GameController.cs"
+"Assets/Scripts/texting.cs"
+"Assets/Scripts/textLoader.cs"
 -langversion:9.0
 
 /deterministic

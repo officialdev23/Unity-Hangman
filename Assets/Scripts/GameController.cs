@@ -9,6 +9,7 @@ public class GameController : MonoBehaviour
     public Text timeField;
    // [SerializeField] private Text timeField;
     public Text wordToFindField;
+    public Text finalAnswer;
     public Text messageField;
     public GameObject[] hangman;   //array of game objects to store the hangman related game objects.
     public GameObject winText;  //to control the win screen
@@ -103,7 +104,9 @@ public class GameController : MonoBehaviour
                     //play lose audio
                     AudioSource a = loseText.GetComponent<AudioSource>(); //get the audio source component from the game object
                     a.Play();  //the game object loseText in this case will have to be in active state for this to work
-
+                    wordToFindField.text = "   ";
+                    finalAnswer.text = words[questionNo].ToUpper();
+                    //wordToFindField.text = chosenWord.ToString();
                     replayButton.SetActive(true);   //show the replay button to reload the scene
                     gameEnd = true;
                 }
